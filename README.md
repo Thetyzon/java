@@ -1,5 +1,3 @@
-package com.company;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -11,31 +9,33 @@ public class Main {
         float velocidadmedia = 0;
 
         Scanner teclado = new Scanner(System.in);
+        distancia = teclado.nextInt();
+        velocidadp = teclado.nextInt();
+        tiempo = teclado.nextInt();
 
-       while (true) {
-           distancia = teclado.nextInt();
-           velocidadp = teclado.nextInt();
-           tiempo = teclado.nextInt();
+        while (distancia != 0 | velocidadp != 0 | tiempo != 0) {
 
-           if (distancia == 0 | velocidadp == 0 | tiempo == 0) {
-           System.exit(1);
-           }
+            distancia = distancia / 1000;
+            tiempo = tiempo / 3600;
+            velocidadmedia = distancia / tiempo;
 
-           else if (distancia > 0 | velocidadp > 0 | tiempo > 0) {
-               distancia = distancia / 1000;
-               tiempo = tiempo / 3600;
-               velocidadmedia = distancia / tiempo;
-           }
-           else if (distancia < 0 | velocidadp < 0 | tiempo < 0) {
-               System.out.println("ERROR");
-           }
-               if (velocidadmedia <= velocidadp) {
-                   System.out.println("OK");
-               }
-               else if (velocidadmedia >= velocidadp){
-                   System.out.println("MULTA");
-               }
+            if (distancia <= 0 | velocidadp <= 0 | tiempo <= 0) {
+                System.out.println("ERROR");
+            }
 
-       }
+            else if (velocidadmedia <= velocidadp ) {
+                System.out.println("OK");
+            }
+            else if (velocidadmedia > (velocidadp * 1.2)) {
+                System.out.println("PUNTOS");
+            }
+            else if (velocidadmedia > velocidadp){
+                System.out.println("MULTA");
+            }
+
+            distancia = teclado.nextInt();
+            velocidadp = teclado.nextInt();
+            tiempo = teclado.nextInt();
+        }
     }
 }
